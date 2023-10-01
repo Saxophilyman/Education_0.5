@@ -83,6 +83,9 @@ class SimpleTree<T> {
         if (Root == null) {
             return 0;
         }
+    if (Root.Children.isEmpty()){
+            return 1;
+        }
         return 1 + getCount(Root);
     }
 
