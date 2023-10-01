@@ -4,13 +4,11 @@ public class SimpleTreeNode<T> {
     public T NodeValue; 
     public SimpleTreeNode<T> Parent; 
     public List<SimpleTreeNode<T>> Children;
-    public int Level;
 
     public SimpleTreeNode(T val, SimpleTreeNode<T> parent) {
         NodeValue = val;
         Parent = parent;
         Children = new ArrayList<>();
-	Level = 0;
     }
 }
 
@@ -84,16 +82,15 @@ class SimpleTree<T> {
         if (Root == null) {
             return 0;
         }
-        if (Root.Children.isEmpty()){
-            return 0;
-        }
-
         return getCount(Root);
     }
+
 
     private int getCount(SimpleTreeNode<T> currentRoot) {
         int allCount = 0;
         if (!currentRoot.Children.isEmpty()) {
+            allCount++;
+        } else {
             allCount++;
             for (SimpleTreeNode<T> child : currentRoot.Children) {
                 allCount += getCount(child);
