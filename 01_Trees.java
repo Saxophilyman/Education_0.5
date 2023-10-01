@@ -74,7 +74,7 @@ class SimpleTree<T> {
 
     public void MoveNode(SimpleTreeNode<T> OriginalNode, SimpleTreeNode<T> NewParent) {
         OriginalNode.Parent.Children.remove(OriginalNode);
-        AddChild(OriginalNode, NewParent);
+		AddChild(NewParent, OriginalNode);
     }
 
     public int Count() {
