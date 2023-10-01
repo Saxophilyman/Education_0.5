@@ -78,43 +78,37 @@ class SimpleTree<T> {
         OriginalNode.Parent.Children.remove(OriginalNode);
         AddChild(OriginalNode, NewParent);
     }
+	public int Count() {
+		
+		if (Root == null) return 0; 
+		
+		return 1 + Count(Root.Children, 0);
+		
+	}
+	
+	private int Count(List<SimpleTreeNode<T>> simpleTreeNodes, int index) {
+		
+		if (simpleTreeNodes == null || index >= simpleTreeNodes.size()) return 0;
+		
+		return 1 + Count(simpleTreeNodes, index + 1) + Count(simpleTreeNodes.get(index).Children, 0);
+		
+	}
 
-    public int Count() {
-        if (Root == null || Root.Children.isEmpty()) {
-            return 0;
-        }
-        return getCount(Root);
-    }
+	public int LeafCount() {
+		
+		if (Root == null) return 0; 
+		
+		return LeafCount(Root.Children, 0);
+		
+	}
+	
+	private int LeafCount(List<SimpleTreeNode<T>> simpleTreeNodes, int index) {
+		
+		if (simpleTreeNodes == null || simpleTreeNodes.size() == 0) return 1;
+		
+		if (index >= simpleTreeNodes.size()) return 0;
+		
+		return LeafCount(simpleTreeNodes, index + 1) + LeafCount(simpleTreeNodes.get(index).Children, 0);
 
-    private int getCount(SimpleTreeNode<T> currentRoot) {
-        int allCount = 0;
-        if (!currentRoot.Children.isEmpty()) {
-            allCount++;
-            for (SimpleTreeNode<T> child : currentRoot.Children) {
-                allCount += getCount(child);
-            }
-        }
-        return allCount;
-    }
-
-    public int LeafCount() {
-        if (Root == null) {
-            return 0;
-        }
-        if (Root.Children.isEmpty()){
-            return 1;
-        }
-        return getLeafCount(Root);
-    }
-
-    private int getLeafCount(SimpleTreeNode<T> currentRoot) {
-        int allLeafCount = 0;
-        if (currentRoot.Children.isEmpty()) {
-            allLeafCount++;
-        } else
-            for (SimpleTreeNode<T> child : currentRoot.Children) {
-                allLeafCount += getLeafCount(child);
-            }
-        return allLeafCount;
-    }
+	}
 }
