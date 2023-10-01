@@ -37,15 +37,17 @@ class SimpleTree<T> {
         return recursionForGetAllNodes(Root);
     }
 
-    private List<SimpleTreeNode<T>> recursionForGetAllNodes(SimpleTreeNode<T> currentRoot) {
-        List<SimpleTreeNode<T>> listNodes = new ArrayList<SimpleTreeNode<T>>();
-        listNodes.add(currentRoot);
+    private List<SimpleTreeNode<T>> recursionForFindNodesByValue(SimpleTreeNode<T> currentRoot, T val) {
+        List<SimpleTreeNode<T>> listNodesOfSearchingValue = new ArrayList<>();
+        if (currentRoot.NodeValue.equals(val)) {
+            listNodesOfSearchingValue.add(currentRoot);
+        }
         if (!currentRoot.Children.isEmpty()) {
             for (SimpleTreeNode<T> child : currentRoot.Children) {
-                listNodes.addAll(recursionForGetAllNodes(child));
+                listNodesOfSearchingValue.addAll(recursionForFindNodesByValue(child, val));
             }
         }
-        return listNodes;
+        return listNodesOfSearchingValue;
     }
 
     public List<SimpleTreeNode<T>> FindNodesByValue(T val) {
