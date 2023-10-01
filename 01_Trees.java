@@ -78,7 +78,7 @@ class SimpleTree<T> {
         if (Root == null) {
             return 0;
         }
-        return getCount(Root);
+        return 1 + getCount(Root);
     }
 
     private int getCount(SimpleTreeNode<T> currentRoot) {
