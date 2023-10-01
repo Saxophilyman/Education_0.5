@@ -15,6 +15,7 @@ public class SimpleTreeNode<T> {
 class SimpleTree<T> {
     public SimpleTreeNode<T> Root; // корень, может быть null
 
+
     public SimpleTree(SimpleTreeNode<T> root) {
         Root = root;
     }
@@ -24,11 +25,13 @@ class SimpleTree<T> {
         NewChild.Parent = ParentNode;
     }
 
+
     public void DeleteNode(SimpleTreeNode<T> NodeToDelete) {
         NodeToDelete.Parent.Children.remove(NodeToDelete);
         NodeToDelete.Parent = null;
         NodeToDelete.Children = null;
     }
+
 
     public List<SimpleTreeNode<T>> GetAllNodes() {
         if (Root == null) {
@@ -37,17 +40,15 @@ class SimpleTree<T> {
         return recursionForGetAllNodes(Root);
     }
 
-    private List<SimpleTreeNode<T>> recursionForFindNodesByValue(SimpleTreeNode<T> currentRoot, T val) {
-        List<SimpleTreeNode<T>> listNodesOfSearchingValue = new ArrayList<>();
-        if (currentRoot.NodeValue.equals(val)) {
-            listNodesOfSearchingValue.add(currentRoot);
-        }
+    private List<SimpleTreeNode<T>> recursionForGetAllNodes(SimpleTreeNode<T> currentRoot) {
+        List<SimpleTreeNode<T>> listNodes = new ArrayList<SimpleTreeNode<T>>();
+        listNodes.add(currentRoot);
         if (!currentRoot.Children.isEmpty()) {
             for (SimpleTreeNode<T> child : currentRoot.Children) {
-                listNodesOfSearchingValue.addAll(recursionForFindNodesByValue(child, val));
+                listNodes.addAll(recursionForGetAllNodes(child));
             }
         }
-        return listNodesOfSearchingValue;
+        return listNodes;
     }
 
     public List<SimpleTreeNode<T>> FindNodesByValue(T val) {
@@ -64,24 +65,24 @@ class SimpleTree<T> {
         }
         if (!currentRoot.Children.isEmpty()) {
             for (SimpleTreeNode<T> child : currentRoot.Children) {
-                recursionForFindNodesByValue(child, val);
+                listNodesOfSearchingValue.addAll(recursionForFindNodesByValue(child, val));
             }
         }
         return listNodesOfSearchingValue;
     }
 
+
     public void MoveNode(SimpleTreeNode<T> OriginalNode, SimpleTreeNode<T> NewParent) {
         OriginalNode.Parent.Children.remove(OriginalNode);
         AddChild(OriginalNode, NewParent);
     }
-	
+
     public int Count() {
         if (Root == null) {
             return 0;
         }
         return getCount(Root);
     }
-
 
     private int getCount(SimpleTreeNode<T> currentRoot) {
         int allCount = 0;
@@ -102,7 +103,7 @@ class SimpleTree<T> {
         if (Root == null) {
             return 0;
         }
-        if (Root.Children.isEmpty()){
+        if (Root.Children.isEmpty()) {
             return 1;
         }
         return getLeafCount(Root);
@@ -117,5 +118,5 @@ class SimpleTree<T> {
                 allLeafCount += getLeafCount(child);
             }
         return allLeafCount;
-    } 
+    }
 }
