@@ -35,6 +35,11 @@ class SimpleTree<T> {
         if (Root == null) {
             return new ArrayList<>();
         }
+        if (Root.Children.isEmpty()){
+            List<SimpleTreeNode<T>> listNodes = new ArrayList<>();
+            listNodes.add(Root);
+            return listNodes;
+        }
         return recursionForGetAllNodes(Root);
     }
 
