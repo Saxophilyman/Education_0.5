@@ -88,9 +88,10 @@ class SimpleTree<T> {
 
     private int getCount(SimpleTreeNode<T> currentRoot) {
         int allCount = 0;
-        if (!currentRoot.Children.isEmpty()) {
+        if (currentRoot.Children.isEmpty()) {
             allCount++;
-        } else {
+        }
+        if (!currentRoot.Children.isEmpty()) {
             allCount++;
             for (SimpleTreeNode<T> child : currentRoot.Children) {
                 allCount += getCount(child);
