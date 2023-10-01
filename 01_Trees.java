@@ -3,12 +3,14 @@ import java.util.*;
 public class SimpleTreeNode<T> {
     public T NodeValue; 
     public SimpleTreeNode<T> Parent; 
-    public List<SimpleTreeNode<T>> Children; 
+    public List<SimpleTreeNode<T>> Children;
+    public int Level;
 
     public SimpleTreeNode(T val, SimpleTreeNode<T> parent) {
         NodeValue = val;
         Parent = parent;
         Children = new ArrayList<>();
+	Level = 0;
     }
 }
 
@@ -121,4 +123,30 @@ class SimpleTree<T> {
             }
         return allLeafCount;
     } 
+
+    public static <T> void determinateLevels (SimpleTree<T> simpleTree) {
+		
+		if (simpleTree.Root == null) return;
+		
+		simpleTree.Root.Level = 0; 
+		
+		determinateLevels(simpleTree.Root.Children, 0, 1);
+		
+	}
+	
+	private static <T> void determinateLevels (List<SimpleTreeNode<T>> simpleTreeNodes, int index, int level) {
+
+		
+		if (simpleTreeNodes == null) return;
+		
+		if(index < simpleTreeNodes.size()) {
+			
+			simpleTreeNodes.get(index).Level = level;
+			
+			determinateLevels(simpleTreeNodes.get(index).Children, 0, level + 1);
+			determinateLevels(simpleTreeNodes, index + 1, level);
+				
+		}
+		
+	}
 }
