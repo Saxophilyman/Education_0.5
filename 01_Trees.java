@@ -80,11 +80,8 @@ class SimpleTree<T> {
     }
 
     public int Count() {
-        if (Root == null) {
+        if (Root == null || Root.Children.isEmpty()) {
             return 0;
-        }
-    if (Root.Children.isEmpty()){
-            return 1;
         }
         return getCount(Root);
     }
@@ -101,9 +98,11 @@ class SimpleTree<T> {
     }
 
     public int LeafCount() {
-        // количество листьев в дереве
-        if (Root == null || Root.Children.isEmpty()) {
+        if (Root == null) {
             return 0;
+        }
+        if (Root.Children.isEmpty()){
+            return 1;
         }
         return getLeafCount(Root);
     }
