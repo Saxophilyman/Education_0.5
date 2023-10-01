@@ -34,20 +34,15 @@ class SimpleTree<T> {
         if (Root == null) {
             return new ArrayList<>();
         }
-        if (Root.Children.isEmpty()){
-            List<SimpleTreeNode<T>> listNodes = new ArrayList<>();
-            listNodes.add(Root);
-            return listNodes;
-        }
         return recursionForGetAllNodes(Root);
     }
 
     private List<SimpleTreeNode<T>> recursionForGetAllNodes(SimpleTreeNode<T> currentRoot) {
         List<SimpleTreeNode<T>> listNodes = new ArrayList<SimpleTreeNode<T>>();
+        listNodes.add(currentRoot);
         if (!currentRoot.Children.isEmpty()) {
-            listNodes.add(currentRoot);
             for (SimpleTreeNode<T> child : currentRoot.Children) {
-                recursionForGetAllNodes(child);
+                listNodes.addAll(recursionForGetAllNodes(child));
             }
         }
         return listNodes;
