@@ -20,6 +20,9 @@ class aBST {
 
 
     private Integer recursionForFindKeyIndex(int arrayIndex, int key) {
+        if (arrayIndex >= Tree.length) {
+            return null;
+        }
         if (Tree[arrayIndex] == null) {
             return -arrayIndex;
         }
@@ -40,13 +43,15 @@ class aBST {
             Tree[0] = key;
             return 0;
         }
-        
         // добавляем ключ в массив
         return recursionForAddKey(0, key);
         // индекс добавленного/существующего ключа или -1 если не удалось
     }
 
     private Integer recursionForAddKey(int arrayIndex, int key) {
+        if (arrayIndex >= Tree.length) {
+            return -1;
+        }
         if (Tree[arrayIndex] == null) {
             Tree[arrayIndex] = key;
             return arrayIndex;
@@ -55,10 +60,10 @@ class aBST {
             return arrayIndex;
         }
         if (key < Tree[arrayIndex]) {
-            return recursionForFindKeyIndex(2 * arrayIndex + 1, key);
+            return recursionForAddKey(2 * arrayIndex + 1, key);
         }
         if (key > Tree[arrayIndex]) {
-            return recursionForFindKeyIndex(2 * arrayIndex + 2, key);
+            return recursionForAddKey(2 * arrayIndex + 2, key);
         }
         return -1;
     }
