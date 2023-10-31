@@ -40,7 +40,7 @@ class BalancedBST {
         }
         int bounds = rightBound - leftBound;
         if (bounds > 3) {
-            int median = (bounds - 1) / 2;
+            int median = leftBound + (bounds - 1) / 2;
             currentNode.NodeKey = array[median];
             currentNode.LeftChild = new BSTNode(0, currentNode);
             currentNode.RightChild = new BSTNode(0, currentNode);
