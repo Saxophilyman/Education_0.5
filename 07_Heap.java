@@ -28,7 +28,7 @@ class Heap {
     }
 
     private void siftingDown(int indexOfSiftingKey) {
-        if (2 * indexOfSiftingKey + 2 <HeapSize){
+        if (2 * indexOfSiftingKey + 2 > HeapSize){
             return;
         }
         if (HeapArray[indexOfSiftingKey] < Math.max(HeapArray[2 * indexOfSiftingKey + 1], HeapArray[2 * indexOfSiftingKey + 2]) && indexOfSiftingKey <= HeapSize) {
